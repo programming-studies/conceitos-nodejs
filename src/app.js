@@ -30,7 +30,9 @@ app.delete("/repositories/:id", (request, response) => {
 });
 
 app.post("/repositories/:id/like", (request, response) => {
-  // TODO
+  const repository = repositories.find(repository => repository.id === request.params.id);
+  repository.likes++;
+  return response.json(repository);
 });
 
 module.exports = app;

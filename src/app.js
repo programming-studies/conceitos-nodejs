@@ -32,7 +32,12 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const repositoryIndex = repositories.findIndex(repository => repository.id == request.params.id);
+  if (repositoryIndex === -1) {
+    return response.status(400).json({error: "Repositório não encontrado."});
+  }
+  repositories.splice(repositoryIndex, 1);
+  return response.status(204).json();
 });
 
 app.post("/repositories/:id/like", (request, response) => {
